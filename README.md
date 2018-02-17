@@ -1,4 +1,4 @@
-#d3.ForceBundle 
+# d3.ForceBundle 
 *Corneliu S.*
 ##### Javascript Force Edge Bundling for d3.js
 ![](readme_img/comp.png) 
@@ -10,7 +10,7 @@ Node-link graphs with many edges and nodes suffer from visual clutter, edge-bund
 **Force edge bundling** **[3]** works by modelling edges between nodes as flexible springs which can attract each other if certain geometrical compatibility criterions are met. 
 The input for the algorithm is a simple node-link diagram of a graph with nodes and edges. In order to change the shape of the basic straight line edges between nodes, the algorithm proceeds by subdividing edges into segments. Attraction *spring* forces are simulated between each pair of consecutive subdivision points on the same graph-edge. Moreover, attraction *electrostatic* forces are computed between subpoints of different edges which are geometrically compatible. The combined force acting on each subdivision point is computed and the points are moved a certain step size in the direction of the force. The force-simulation on these sub-points is repeted a certain amout of iterations. After the end of a cycle of iterations the resulting graph-edges are divided again in smaller segements and the whole process repeats itself until the end cycle is reached. It's important to note that the position of original node-points are fixed throughout the simulation.
 #### Parameters Tuning
-#####Fixed Parameters 
+##### Fixed Parameters 
 A certain number of parameters have been fixed to specific optimized values as found through experimentation by the authors. These include the spring constants **K** (=0.1), which controls the amount of bundling by controling the stiffness of edges. The number of iterations for simulating force interactions **I** (=60) and the number of cycles of subdivision-force simulation iterations **C** (=6). Moreover, the initial number of division points **P** is set to 1 and the rate at which it increases set to 2. The rate of the number of iterations **I** decreases each cycle is set to **2/3**.
 All these parameters can be changed nonetheless if really needed by using the following methods:
 
@@ -28,13 +28,13 @@ Two parameters are **essential** for tuning the algorithm to produce usable diag
 The **most important parameter** is the **initial step size** used to move the subdivision points after forces have been computed. This depends on both the scale of the graph and the number of edges and nodes contained. Having a step size which is too low will produce node-link like graphs while too high values will over distort edges. This can be set using the ***step_size*** function and passing your new step float size value. The default value is set to **0.1**.
 
 
-##Usage
-###Import The Plugin 
+## Usage
+### Import The Plugin 
 ```html
 	<script type="text/javascript" src="d3-ForceEdgeBundling.js"></script>
 ```
-###Input Data
-####Node Data
+### Input Data
+#### Node Data
 The Nodes and their positions are stored by their id in a basic dictionary.
 ```javascript
 var node_data = {
@@ -46,13 +46,13 @@ var node_data = {
 	"5":{"x":925.4861099999999, "y":313.275}
 	}
 ```
-####Edge Data
+#### Edge Data
 The edges are stored in an array, with each edge being represtend by an object with a *source* and *target* field. The id of the endpoints nodes are used as values. 
 ```javascript
 var edge_data = [{"source":"0", "target":"1"}, {"source":"4", "target":"2"}, {"source":"0", "target":"3"}, {"source":"0","target":"4"}, {"source":"2", "target":"5"}, {"source":"3", "target":"2"}, {"source":"3", "target":"4"}]
 ```
 	
-###Output Data
+### Output Data
 The algorithm outputs an array of arrays of subdivision points obtained on the last cycle of the algorithm. For each initial edge we now have an array of subpoints. See dumbed-down example output below:
 ```javascript	
 	[
@@ -77,8 +77,8 @@ The algorithm outputs an array of arrays of subdivision points obtained on the l
 		  {"x":598.9402957673196, "y":296.5373242419396}]
         ]
 ```
-###Running the algorithm
-####With Default Parameters Values:
+### Running the algorithm
+#### With Default Parameters Values:
 ```javascript
 	var fbundling = d3.ForceEdgeBundling()
 				.nodes(node_data)
@@ -113,7 +113,7 @@ Plotting can be done by using standard *d3* methods i.e. drawing lines between e
             	.style('stroke-opacity',0.15); //use opacity as blending
         });
 ```        
-##Example
+## Example
 #### Live Demo
 [Live Demo on bl.ocks.org](http://bl.ocks.org/upphiminn/6515478)
 
